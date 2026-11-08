@@ -1,0 +1,207 @@
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+======================================== */
+
+.usuarios-container {
+  width: 100%;
+}
+
+/* ========================================
+   ENCABEZADO
+======================================== */
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 1.9rem;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--muted-color);
+}
+
+/* ========================================
+   PANEL
+======================================== */
+
+.panel {
+  padding: 28px;
+  margin-bottom: 24px;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.panel-header h2 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+}
+
+.panel-header p {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+/* CONTADOR */
+
+.users-count {
+  display: inline-block;
+  padding: 8px 14px;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ========================================
+   TABLA
+======================================== */
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.users-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.users-table th {
+  padding: 16px 18px;
+  background-color: #1e293b;
+  color: white;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.users-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.users-table tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.users-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* INFORMACIÓN DEL USUARIO */
+
+.username {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.user-email {
+  color: var(--muted-color);
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   ETIQUETAS DE ROLES
+======================================== */
+
+.role-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ADMINISTRADOR */
+
+.admin-role {
+  background-color: #e8e7fa;
+  color: #4f46a5;
+  border: 1px solid #d6d3f5;
+}
+
+/* USUARIO NORMAL */
+
+.user-role {
+  background-color: #e2e8f0;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+/* SIN USUARIOS */
+
+.empty-message {
+  padding: 30px !important;
+  text-align: center;
+  color: var(--muted-color);
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+  .panel {
+    padding: 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 14px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .panel {
+    padding: 16px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .users-table {
+    min-width: 550px;
+  }
+
+}

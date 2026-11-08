@@ -1,0 +1,96 @@
+
+<div class="usuarios-container">
+
+  <!-- ENCABEZADO -->
+  <header class="page-header">
+    <h1>Usuarios registrados</h1>
+
+    <p>
+      Consulte los usuarios registrados
+      y sus respectivos roles dentro del sistema.
+    </p>
+  </header>
+
+  <!-- PANEL DE USUARIOS -->
+  <section class="panel">
+
+    <div class="panel-header">
+      <div>
+        <h2>Listado de usuarios</h2>
+        <p>Información general de las cuentas registradas.</p>
+      </div>
+
+      <span class="users-count">
+        {{ usuarios.length }}
+        {{ usuarios.length === 1 ? 'usuario' : 'usuarios' }}
+      </span>
+    </div>
+
+    <!-- TABLA RESPONSIVE -->
+    <div class="table-container">
+
+      <table class="users-table">
+
+        <thead>
+          <tr>
+            <th>Nombre de usuario</th>
+            <th>Correo electrónico</th>
+            <th>Rol</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (usuario of usuarios; track usuario.userName) {
+
+            <tr>
+
+              <td>
+                <span class="username">
+                  {{ usuario.userName }}
+                </span>
+              </td>
+
+              <td>
+                <span class="user-email">
+                  {{ usuario.correo }}
+                </span>
+              </td>
+
+              <td>
+                @if (usuario.rol === 'SUPER-ADMIN-ROLE') {
+
+                  <span class="role-badge admin-role">
+                    Administrador
+                  </span>
+
+                } @else {
+
+                  <span class="role-badge user-role">
+                    Usuario
+                  </span>
+
+                }
+              </td>
+
+            </tr>
+
+          } @empty {
+
+            <tr>
+              <td colspan="3" class="empty-message">
+                No hay usuarios registrados.
+              </td>
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

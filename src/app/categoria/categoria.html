@@ -1,0 +1,197 @@
+
+<div class="categorias-container">
+
+  <!-- ENCABEZADO -->
+  <header class="page-header">
+    <div>
+      <h1>Administración de categorías</h1>
+      <p>Gestione las categorías disponibles en el inventario.</p>
+    </div>
+  </header>
+
+  <!-- FORMULARIO PARA CREAR Y EDITAR -->
+  @if (authService.esAdmin()) {
+
+    <section class="panel">
+
+      <div class="panel-header">
+        <h2>
+          {{ categoriaEditando() !== null ? 'Editar categoría' : 'Crear categoría' }}
+        </h2>
+        <p>Complete la información de la categoría.</p>
+      </div>
+
+      <form
+        class="categoria-form"
+        [formGroup]="categoriaForm"
+        (ngSubmit)="guardarCategoria()"
+      >
+
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            type="text"
+            formControlName="nombre"
+            placeholder="Nombre de la categoría"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <input
+            id="descripcion"
+            type="text"
+            formControlName="descripcion"
+            placeholder="Descripción de la categoría"
+          />
+        </div>
+
+        <div class="form-actions full-width">
+
+          <button type="submit" class="primary">
+            {{ categoriaEditando() !== null ? 'Actualizar categoría' : 'Guardar categoría' }}
+          </button>
+
+          @if (categoriaEditando() !== null) {
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="cancelarEdicion()"
+            >
+              Cancelar edición
+            </button>
+          }
+
+        </div>
+
+      </form>
+
+    </section>
+  }
+
+  <!-- BUSCAR CATEGORÍA POR ID -->
+  <section class="panel">
+
+    <div class="panel-header">
+      <h2>Buscar categoría por ID</h2>
+      <p>Consulte la información de una categoría específica.</p>
+    </div>
+
+    <div class="search-form">
+
+      <div class="form-group">
+        <label for="idBusqueda">ID de categoría</label>
+
+        <input
+          id="idBusqueda"
+          type="number"
+          min="1"
+          step="1"
+          [formControl]="idBusqueda"
+          placeholder="Ingrese el ID"
+        />
+      </div>
+
+      <button
+        type="button"
+        class="primary"
+        (click)="buscarCategoria()"
+      >
+        Buscar
+      </button>
+
+    </div>
+
+    @if (categoriaBuscada(); as categoria) {
+
+      <div class="search-result">
+        <h3>Resultado de la búsqueda</h3>
+
+        <div class="category-details">
+          <p><strong>ID:</strong> {{ categoria.id }}</p>
+          <p><strong>Nombre:</strong> {{ categoria.nombre }}</p>
+          <p><strong>Descripción:</strong> {{ categoria.descripcion }}</p>
+        </div>
+
+        @if (authService.esAdmin()) {
+          <button
+            type="button"
+            class="edit-button"
+            (click)="editarCategoria(categoria)"
+          >
+            Editar esta categoría
+          </button>
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+  <!-- LISTADO DE CATEGORÍAS -->
+  <section class="panel">
+
+    <div class="panel-header">
+      <h2>Listado de categorías</h2>
+      <p>Categorías registradas en el sistema.</p>
+    </div>
+
+    <div class="categories-grid">
+
+      @for (categoria of categoriaList(); track categoria.id) {
+
+        <article class="category-card">
+
+          <div class="category-card-header">
+            <h3>{{ categoria.nombre }}</h3>
+
+            <span class="category-id">
+              ID: {{ categoria.id }}
+            </span>
+          </div>
+
+          <p class="category-description">
+            {{ categoria.descripcion }}
+          </p>
+
+          @if (authService.esAdmin()) {
+
+            <div class="category-actions">
+
+              <button
+                type="button"
+                class="edit-button"
+                (click)="editarCategoria(categoria)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                class="delete-button"
+                (click)="eliminarCategoria(categoria)"
+              >
+                Eliminar
+              </button>
+
+            </div>
+
+          }
+
+        </article>
+
+      } @empty {
+
+        <p class="empty-message">
+          No hay categorías disponibles.
+        </p>
+
+      }
+
+    </div>
+
+  </section>
+
+</div>
